@@ -21,19 +21,20 @@ RSpec.describe User, type: :model do
 
   describe 'validation' do
     let(:user) { build(:user) } # build: オブジェクトのみ生成
+    subject { user.valid? }
 
     it 'name and age presence' do
-      expect(user.valid?).to be true
+      is_expected.to be true
     end
 
     it 'name empty' do
       user.name = ''
-      expect(user.valid?).to be false
+      is_expected.to be false
     end
 
     it 'age empty' do
       user.age = ''
-      expect(user.valid?).to be false
+      is_expected.to be false
     end
   end
 end
