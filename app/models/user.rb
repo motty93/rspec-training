@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  validates :name, presence: true
+  validates :age, presence: true
+
   def greet
     if self.age <= 12
       "ぼくは#{self.name}だよ"
