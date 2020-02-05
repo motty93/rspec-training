@@ -1,6 +1,11 @@
 FactoryBot.define do
-  factory :user do
-    name { "MyString" }
-    age { 1 }
+  factory :taro, class: User do
+    name { "たろう" }
+    age { 11 }
+  end
+
+  factory :yuki, class: User do
+    name { "ユウキ" }
+    age { 20 }
   end
 end
