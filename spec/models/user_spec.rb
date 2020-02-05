@@ -1,5 +1,39 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#greet' do
+    context '12歳以下の場合' do
+      let(:taro) { create(:taro) }
+
+      it '12歳以下のときはひらがなで答える' do
+        expect(taro.greet).to eq 'ぼくはたろうだよ'
+      end
+    end
+
+    context '13歳以上の場合' do
+      let(:yuki) { create(:yuki) }
+
+      it '13歳以上のときはひらがなで答える' do
+        expect(yuki.greet).to eq '僕はユウキです'
+      end
+    end
+  end
+
+  describe 'validation' do
+    let(:user) { build(:user) } # build: オブジェクトのみ生成
+
+    it 'name and age presence' do
+      expect(user.valid?).to be true
+    end
+
+    it 'name empty' do
+      user.name = ''
+      expect(user.valid?).to be false
+    end
+
+    it 'age empty' do
+      user.age = ''
+      expect(user.valid?).to be false
+    end
+  end
 end
