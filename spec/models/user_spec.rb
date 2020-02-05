@@ -23,21 +23,26 @@ RSpec.describe User, type: :model do
     let(:user) { build(:user) } # build: オブジェクトのみ生成
     subject { user.valid? }
 
+    shared_examples 'presence or empty' do
+      it { is_expected.to be boolean }
+    end
+
     describe 'presence pattern' do
-      it { is_expected.to be true }
+      let(:boolean) { true }
+      it_behaves_like 'presence or empty'
     end
 
     describe 'empty pattern' do
+      let(:boolean) { false }
+
       context 'name empty' do
         before { user.name = '' }
-
-        it { is_expected.to be false }
+        it_behaves_like 'presence or empty'
       end
 
       context 'age empty' do
         before { user.age = '' }
-
-        it { is_expected.to be false }
+        it_behaves_like 'presence or empty'
       end
     end
   end
